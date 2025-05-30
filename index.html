@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TAK-OS - Menu Mexican Restaurant - Authentic Mexican Food</title>
+    <meta
+      name="description"
+      content="Menu Mexican Restaurant – Authentic Mexican food with nixtamal tortillas and local ingredients from poland TACOS, QUESADILLAS, TORTAS, AGUAS FRESCAS. Gluten-free option available."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body class="relative bg-neutral-50 text-gray-800 font-sans">
+    <!-- Logos Top -->
+    <div
+      class="bg-white w-full px-6 py-3 shadow-sm flex justify-between items-center max-w-6xl mx-auto"
+    >
+      <img
+        src="https://assets.zyrosite.com/AVL7qZVElOfv5XjR/food22_logo_green-m2W8wB1DM3SOk06N.png"
+        alt="Food22 Logo"
+        class="h-12 sm:h-16 object-contain"
+      />
+      <img
+        src="https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-28_22h52_20-YD0l15DVqjS2yJqb.png"
+        alt="TAK-OS Logo"
+        class="h-12 sm:h-16 object-contain"
+      />
+    </div>
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div
+        class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center"
+      >
+        <div class="text-center w-full sm:w-auto">
+          <h1 class="text-2xl font-bold text-[#d6283b]">🌮 Menu</h1>
+          <p class="text-sm text-gray-500">Nożownicza 12, 50-120 Wrocław</p>
+        </div>
+        <div class="mt-2 sm:mt-0">
+          <select
+            id="langSwitcher"
+            class="bg-[#d6283b] text-white px-4 py-2 rounded-full text-sm font-medium shadow hover:bg-[#b71b2b] transition"
+          >
+            <option value="es">🇲🇽 Español</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="pl" selected>🇵🇱 Polski</option>
+            <option value="ua">🇺🇦 Українська</option>
+            <option value="de">🇩🇪 Deutsch</option>
+          </select>
+        </div>
+      </div>
+    </header>
+    <main class="max-w-6xl mx-auto px-4 pt-4">
+      <div
+        <div
+        class="sticky top-[72px] z-50 bg-white mb-6 shadow-sm transition-all duration-300"
+      >
+        <div class="overflow-x-auto no-scrollbar">
+          <div class="flex gap-2 w-max px-2 py-2" id="menuTabs">
+            <button
+              data-tab="tacos"
+              class="tab-btn bg-[#d6283b] text-white px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+              id="tabTacos"
+            >
+              🌮 Tacos
+            </button>
+            <button
+              data-tab="tortas"
+              class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+              id="tabTortas"
+            >
+              🥪 Tortas
+            </button>
+            <button
+              data-tab="quesadillas"
+              class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+              id="tabQuesadillas"
+            >
+              🫓 Quesadillas
+            </button>
+            <button
+              data-tab="salsas"
+              class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+              id="tabSalsas"
+            >
+              🌶️ Salsas
+            </button>
+            <button
+              data-tab="bebidas"
+              class="tab-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+              id="tabBebidas"
+            >
+              🥤 Bebidas
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="menuContent" class="grid gap-6"></div>
+      <script>
+        const langLabels = {
+          es: {
+            calorias: "Calorías",
+            ingredientes: "Ingredientes",
+            tacos: "🌮 Tacos",
+            tortas: "🥪 Tortas",
+            quesadillas: "🫓 Quesadillas",
+            salsas: "🌶️ Salsas",
+            bebidas: "🥤 Bebidas",
+            digitalMenu: "¿Quieres tu menú digital?",
+            visitSite: "Visita www.food22.tech",
+          },
+          en: {
+            calorias: "Calories",
+            ingredientes: "Ingredients",
+            tacos: "🌮 Tacos",
+            tortas: "🥪 Tortas",
+            quesadillas: "🫓 Quesadillas",
+            salsas: "🌶️ Salsas",
+            bebidas: "🥤 Drinks",
+            digitalMenu: "Do you want your digital menu?",
+            visitSite: "Visit www.food22.tech",
+          },
+          pl: {
+            calorias: "Kalorie",
+            ingredientes: "Składniki",
+            tacos: "🌮 Tacos",
+            tortas: "🥪 Kanapki",
+            quesadillas: "🫓 Quesadillas",
+            salsas: "🌶️ Sosy",
+            bebidas: "🥤 Napoje",
+            digitalMenu: "Chcesz swoje cyfrowe menu?",
+            visitSite: "Odwiedź www.food22.tech",
+          },
+          ua: {
+            calorias: "Калорії",
+            ingredientes: "Інгредієнти",
+            tacos: "🌮 Тако",
+            tortas: "🥪 Тортас",
+            quesadillas: "🫓 Кесадільї",
+            salsas: "🌶️ Сальси",
+            bebidas: "🥤 Напої",
+            digitalMenu: "Хочеш своє цифрове меню?",
+            visitSite: "Відвідай www.food22.tech",
+          },
+          de: {
+            calorias: "Kalorien",
+            ingredientes: "Zutaten",
+            tacos: "🌮 Tacos",
+            tortas: "🥪 Sandwiches",
+            quesadillas: "🫓 Quesadillas",
+            salsas: "🌶️ Salsas",
+            bebidas: "🥤 Getränke",
+            digitalMenu: "Möchtest du dein digitales Menü?",
+            visitSite: "Besuche www.food22.tech",
+          },
+        };
+
+        let currentLang = document.getElementById("langSwitcher").value;
+
+        const dishes = [
+          {
+            id: "pastor",
+            category: "tacos",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-28_22h50_27-Yg2j8PWNyohMkPN8.png",
+            title: {
+              es: "Tacos al Pastor – 40 zł",
+              en: "Al Pastor Tacos – 40 zł",
+              pl: "Tacos al Pastor – 40 zł",
+              ua: "Тако аль Пастор – 40 zł",
+              de: "Tacos al Pastor – 40 zł",
+            },
+            desc: {
+              es: "Un taco al pastor es una explosión de sabor: finas láminas de cerdo en adobo de chiles, achiote y especias, asadas. Se sirve en tortilla de maíz, con piña caramelizada, cebolla, cilantro y salsa picante.",
+              en: "An Al Pastor taco is a flavor explosion: thin slices of marinated pork in chili, achiote, and spices, grilled and served on a corn tortilla with caramelized pineapple, onion, cilantro, and spicy salsa.",
+              pl: "Taco al Pastor to eksplozja smaku: cienkie plastry wieprzowiny w marynacie z chili, achiote i przypraw, grillowane i podawane w tortilli kukurydzianej z karmelizowanym ananasem, cebulą, kolendrą i ostrym sosem.",
+              ua: "Тако аль Пастор — це вибух смаку: тонкі скибочки свинини в маринаді з чилі, ачиоте та спецій, смажені на грилі й подані в кукурудзяній тортильї з карамелізованим ананасом, цибулею, кінзою та гострим соусом.",
+              de: "Ein Al Pastor Taco ist eine Geschmacksexplosion: dünne Scheiben Schweinefleisch in Chili-, Achiote- und Gewürzmarinade, gegrillt und serviert in einer Maistortilla mit karamellisierter Ananas, Zwiebeln, Koriander und scharfer Salsa.",
+            },
+            ingredients: {
+              es: "Carne de puerco, chiles (guajillo, achiote, chile de árbol y chile piquín), ajo, clavos, pimienta, orégano, vinagre, jugo de naranja o piña, tortilla de maíz, cebolla blanca picada, cilantro fresco, piña asada en trocitos.",
+              en: "Pork, chilies (guajillo, achiote, árbol, piquín), garlic, cloves, pepper, oregano, vinegar, orange or pineapple juice, corn tortilla, chopped white onion, fresh cilantro, grilled pineapple.",
+              pl: "Wieprzowina, chili (guajillo, achiote, árbol, piquín), czosnek, goździki, pieprz, oregano, ocet, sok pomarańczowy lub ananasowy, tortilla kukurydziana, posiekana biała cebula, świeża kolendra, grillowany ananas.",
+              ua: "Свинина, чилі (гуаїльо, ачиоте, árbol, пікін), часник, гвоздика, перець, орегано, оцет, апельсиновий або ананасовий сік, кукурудзяна тортилья, подрібнена біла цибуля, свіжа кінза, запечений ананас.",
+              de: "Schweinefleisch, Chilis (Guajillo, Achiote, Árbol, Piquín), Knoblauch, Nelken, Pfeffer, Oregano, Essig, Orangen- oder Ananassaft, Maistortilla, gehackte weiße Zwiebel, frischer Koriander, gegrillte Ananas.",
+            },
+            calories: "490 kcal",
+            macros: {
+              es: "Proteína: 28g, Grasa: 27g, Carbohidratos: 32g",
+              en: "Protein: 28g, Fat: 27g, Carbs: 32g",
+              pl: "Białko: 28g, Tłuszcz: 27g, Węglowodany: 32g",
+              ua: "Білки: 28г, Жири: 27г, Вуглеводи: 32г",
+              de: "Eiweiß: 28g, Fett: 27g, Kohlenhydrate: 32g",
+            },
+          },
+          {
+            id: "cochinita",
+            category: "tacos",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_09h01_24-mp8Wan8llkCak8l7.png",
+            title: {
+              es: "Tacos de Cochinita – 40 zł",
+              en: "Cochinita Tacos – 40 zł",
+              pl: "Tacos z Cochinita – 40 zł",
+              ua: "Тако з Кочініто – 40 zł",
+              de: "Tacos Cochinita – 40 zł",
+            },
+            desc: {
+              es: "Cerdo marinado en achiote y jugo de naranja, cocido lentamente hasta que se deshace. Servido en tortilla de maíz con cebolla morada encurtida y salsa de habanero.",
+              en: "Pork marinated in achiote and orange juice, slowly cooked until tender. Served on a corn tortilla with pickled red onion and habanero salsa.",
+              pl: "Wieprzowina marynowana w achiote i soku pomarańczowym, powoli gotowana do miękkości. Podawana na tortilli kukurydzianej z marynowaną czerwoną cebulą i sosem habanero.",
+              ua: "Свинина, маринована в ачіоте та апельсиновому соку, повільно готується до м’якості. Подається на кукурудзяній тортильї з маринованою червоною цибулею та соусом хабанеро.",
+              de: "Schweinefleisch mariniert in Achiote und Orangensaft, langsam gegart bis zart. Serviert auf einer Maistortilla mit eingelegten roten Zwiebeln und Habanero-Salsa.",
+            },
+            ingredients: {
+              es: "Carne de cerdo, achiote, jugo de naranja, vinagre, ajo, cebolla morada, especias.",
+              en: "Pork, achiote, orange juice, vinegar, garlic, red onion, spices.",
+              pl: "Wieprzowina, achiote, sok pomarańczowy, ocet, czosnek, czerwona cebula, przyprawy.",
+              ua: "Свинина, ачіоте, апельсиновий сік, оцет, часник, червона цибуля, спеції.",
+              de: "Schweinefleisch, Achiote, Orangensaft, Essig, Knoblauch, rote Zwiebel, Gewürze.",
+            },
+            calories: "470 kcal",
+            macros: {
+              es: "Proteína: 26g, Grasa: 25g, Carbohidratos: 30g",
+              en: "Protein: 26g, Fat: 25g, Carbs: 30g",
+              pl: "Białko: 26g, Tłuszcz: 25g, Węglowodany: 30g",
+              ua: "Білки: 26г, Жири: 25г, Вуглеводи: 30г",
+              de: "Eiweiß: 26g, Fett: 25g, Kohlenhydrate: 30g",
+            },
+          },
+          {
+            id: "lengua",
+            category: "tacos",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_08h59_04-AGB2OGBExgCkV37p.png",
+            title: {
+              es: "Tacos de Lengua – 40 zł",
+              en: "Beef Tongue Tacos – 40 zł",
+              pl: "Tacos z Języka Wołowego – 40 zł",
+              ua: "Тако з Язиком – 40 zł",
+              de: "Tacos mit Rinderzunge – 40 zł",
+            },
+            desc: {
+              es: "Tierna lengua de res cocida lentamente hasta quedar suave y jugosa. Se sirve picada sobre tortilla de maíz, acompañada con cebolla, cilantro y salsa verde.",
+              en: "Tender beef tongue slowly cooked until soft and juicy. Served chopped on a corn tortilla with onion, cilantro, and green salsa.",
+              pl: "Delikatny język wołowy powoli gotowany, aż stanie się miękki i soczysty. Podawany posiekany na tortilli kukurydzianej z cebulą, kolendrą i zielonym sosem.",
+              ua: "Ніжний яловичий язик, повільно приготований до м’якості й соковитості. Подається подрібненим на кукурудзяній тортильї з цибулею, кінзою та зеленою сальсою.",
+              de: "Zarte Rinderzunge, langsam gegart bis sie weich und saftig ist. Serviert gehackt auf einer Maistortilla mit Zwiebeln, Koriander und grüner Salsa.",
+            },
+            ingredients: {
+              es: "Lengua de res, ajo, laurel, cebolla, cilantro fresco, sal, tortilla de maíz, salsa verde.",
+              en: "Beef tongue, garlic, bay leaf, onion, fresh cilantro, salt, corn tortilla, green salsa.",
+              pl: "Język wołowy, czosnek, liść laurowy, cebula, świeża kolendra, sól, tortilla kukurydziana, zielony sos.",
+              ua: "Яловичий язик, часник, лавровий лист, цибуля, свіжа кінза, сіль, кукурудзяна тортилья, зелена сальса.",
+              de: "Rinderzunge, Knoblauch, Lorbeerblatt, Zwiebel, frischer Koriander, Salz, Maistortilla, grüne Salsa.",
+            },
+            calories: "460 kcal",
+            macros: {
+              es: "Proteína: 27g, Grasa: 24g, Carbohidratos: 31g",
+              en: "Protein: 27g, Fat: 24g, Carbs: 31g",
+              pl: "Białko: 27g, Tłuszcz: 24g, Węglowodany: 31g",
+              ua: "Білки: 27г, Жири: 24г, Вуглеводи: 31г",
+              de: "Eiweiß: 27g, Fett: 24g, Kohlenhydrate: 31g",
+            },
+          },
+          {
+            id: "barbacoa",
+            category: "tacos",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_08h59_04-AGB2OGBExgCkV37p.png",
+            title: {
+              es: "Tacos de Barbacoa – 40 zł",
+              en: "Barbacoa Tacos – 40 zł",
+              pl: "Tacos z Barbacoa – 40 zł",
+              ua: "Тако з барбакоа – 40 zł",
+              de: "Tacos Barbacoa – 40 zł",
+            },
+            desc: {
+              es: "Carne de res cocida al vapor con especias hasta que se deshace. Servida en tortilla de maíz con cebolla, cilantro y salsa picante.",
+              en: "Beef steamed with spices until it falls apart. Served on a corn tortilla with onion, cilantro, and spicy salsa.",
+              pl: "Wołowina gotowana na parze z przyprawami aż do rozpadu. Podawana na tortilli kukurydzianej z cebulą, kolendrą i ostrym sosem.",
+              ua: "Яловичина, приготована на парі з спеціями до розпаду. Подається на кукурудзяній тортильї з цибулею, кінзою та гострим соусом.",
+              de: "Rindfleisch gedämpft mit Gewürzen bis es zerfällt. Serviert auf einer Maistortilla mit Zwiebel, Koriander und scharfer Salsa.",
+            },
+            ingredients: {
+              es: "Carne de res, ajo, cebolla, laurel, orégano, sal, pimienta.",
+              en: "Beef, garlic, onion, bay leaf, oregano, salt, pepper.",
+              pl: "Wołowina, czosnek, cebula, liść laurowy, oregano, sól, pieprz.",
+              ua: "Яловичина, часник, цибуля, лавровий лист, орегано, сіль, перець.",
+              de: "Rindfleisch, Knoblauch, Zwiebel, Lorbeerblatt, Oregano, Salz, Pfeffer.",
+            },
+            calories: "480 kcal",
+            macros: {
+              es: "Proteína: 30g, Grasa: 24g, Carbohidratos: 29g",
+              en: "Protein: 30g, Fat: 24g, Carbs: 29g",
+              pl: "Białko: 30g, Tłuszcz: 24g, Węglowodany: 29g",
+              ua: "Білки: 30г, Жири: 24г, Вуглеводи: 29г",
+              de: "Eiweiß: 30g, Fett: 24g, Kohlenhydrate: 29g",
+            },
+          },
+          {
+            id: "calabacitas",
+            category: "tacos",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_08h59_04-AGB2OGBExgCkV37p.png",
+            title: {
+              es: "Tacos de Calabacitas – 30 zł",
+              en: "Zucchini Tacos – 30 zł",
+              pl: "Tacos z Cukinią – 30 zł",
+              ua: "Тако з кабачками – 30 zł",
+              de: "Tacos mit Zucchini – 30 zł",
+            },
+            desc: {
+              es: "Salteado de calabacitas con cebolla, elote y epazote, servido en tortilla de maíz. Ligero y lleno de sabor.",
+              en: "Sautéed zucchini with onion, corn, and epazote, served on a corn tortilla. Light and flavorful.",
+              pl: "Smażona cukinia z cebulą, kukurydzą i epazote, podawana na tortilli kukurydzianej. Lekka i pełna smaku.",
+              ua: "Смажені кабачки з цибулею, кукурудзою та епацоте, подаються на кукурудзяній тортильї. Легкий і смачний.",
+              de: "Gebratene Zucchini mit Zwiebel, Mais und Epazote, serviert auf einer Maistortilla. Leicht und aromatisch.",
+            },
+            ingredients: {
+              es: "Calabacitas, cebolla, elote, epazote, ajo, sal, tortilla de maíz.",
+              en: "Zucchini, onion, corn, epazote, garlic, salt, corn tortilla.",
+              pl: "Cukinia, cebula, kukurydza, epazote, czosnek, sól, tortilla kukurydziana.",
+              ua: "Кабачки, цибуля, кукурудза, епацоте, часник, сіль, кукурудзяна тортилья.",
+              de: "Zucchini, Zwiebel, Mais, Epazote, Knoblauch, Salz, Maistortilla.",
+            },
+            calories: "320 kcal",
+            macros: {
+              es: "Proteína: 8g, Grasa: 12g, Carbohidratos: 42g",
+              en: "Protein: 8g, Fat: 12g, Carbs: 42g",
+              pl: "Białko: 8g, Tłuszcz: 12g, Węglowodany: 42g",
+              ua: "Білки: 8г, Жири: 12г, Вуглеводи: 42г",
+              de: "Eiweiß: 8g, Fett: 12g, Kohlenhydrate: 42g",
+            },
+          },
+          {
+            id: "setas",
+            category: "tacos",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_08h59_04-AGB2OGBExgCkV37p.png",
+            title: {
+              es: "Tacos de Setas – 32 zł",
+              en: "Mushroom Tacos – 32 zł",
+              pl: "Tacos z Grzybami – 32 zł",
+              ua: "Тако з грибами – 32 zł",
+              de: "Tacos mit Pilzen – 32 zł",
+            },
+            desc: {
+              es: "Setas salteadas con ajo, epazote y cebolla, en tortilla de maíz. Una opción deliciosa y vegetariana.",
+              en: "Sautéed mushrooms with garlic, epazote and onion in a corn tortilla. A delicious vegetarian option.",
+              pl: "Smażone grzyby z czosnkiem, epazote i cebulą w tortilli kukurydzianej. Smaczna wegetariańska opcja.",
+              ua: "Смажені гриби з часником, епацоте та цибулею в кукурудзяній тортильї. Смачна вегетаріанська страва.",
+              de: "Gebratene Pilze mit Knoblauch, Epazote und Zwiebeln in einer Maistortilla. Eine köstliche vegetarische Option.",
+            },
+            ingredients: {
+              es: "Setas mixtas, ajo, cebolla, epazote, sal, aceite vegetal, tortilla de maíz.",
+              en: "Mixed mushrooms, garlic, onion, epazote, salt, vegetable oil, corn tortilla.",
+              pl: "Mieszane grzyby, czosnek, cebula, epazote, sól, olej roślinny, tortilla kukurydziana.",
+              ua: "Суміш грибів, часник, цибуля, епацоте, сіль, рослинна олія, кукурудзяна тортилья.",
+              de: "Gemischte Pilze, Knoblauch, Zwiebel, Epazote, Salz, Pflanzenöl, Maistortilla.",
+            },
+            calories: "350 kcal",
+            macros: {
+              es: "Proteína: 10g, Grasa: 15g, Carbohidratos: 38g",
+              en: "Protein: 10g, Fat: 15g, Carbs: 38g",
+              pl: "Białko: 10g, Tłuszcz: 15g, Węglowodany: 38g",
+              ua: "Білки: 10г, Жири: 15г, Вуглеводи: 38г",
+              de: "Eiweiß: 10g, Fett: 15g, Kohlenhydrate: 38g",
+            },
+          },
+          {
+            id: "torta_pastor",
+            category: "tortas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_09h03_36-dJoZjJoDBbcp45xK.png",
+            title: {
+              es: "Torta de Pastor – 42 zł",
+              en: "Al Pastor Sandwich – 42 zł",
+              pl: "Kanapka al Pastor – 42 zł",
+              ua: "Сендвіч аль Пастор – 42 zł",
+              de: "Pastor Sandwich – 42 zł",
+            },
+            desc: {
+              es: "Pan crujiente relleno de carne al pastor, piña, frijoles refritos, aguacate, cebolla y salsa. Una mezcla explosiva de sabor y tradición.",
+              en: "Crispy bread filled with al pastor meat, pineapple, refried beans, avocado, onion, and salsa. A flavorful and traditional combination.",
+              pl: "Chrupiące pieczywo z mięsem al pastor, ananasem, smażoną fasolą, awokado, cebulą i salsą. Eksplozja smaku i tradycji.",
+              ua: "Хрусткий хліб з м’ясом аль пастор, ананасом, смаженою квасолею, авокадо, цибулею та сальсою. Смакова традиція.",
+              de: "Knuspriges Brot mit Al Pastor Fleisch, Ananas, Bohnenmus, Avocado, Zwiebeln und Salsa. Eine Explosion aus Geschmack und Tradition.",
+            },
+            ingredients: {
+              es: "Pan telera, carne de pastor, piña, frijoles refritos, aguacate, cebolla, salsa.",
+              en: "Telera bread, al pastor meat, pineapple, refried beans, avocado, onion, salsa.",
+              pl: "Bułka telera, mięso al pastor, ananas, smażona fasola, awokado, cebula, salsa.",
+              ua: "Хліб тельєра, м’ясо аль пастор, ананас, смажена квасоля, авокадо, цибуля, сальса.",
+              de: "Telera-Brot, Pastor-Fleisch, Ananas, Bohnenmus, Avocado, Zwiebel, Salsa.",
+            },
+            calories: "620 kcal",
+            macros: {
+              es: "Proteína: 32g, Grasa: 30g, Carbohidratos: 55g",
+              en: "Protein: 32g, Fat: 30g, Carbs: 55g",
+              pl: "Białko: 32g, Tłuszcz: 30g, Węglowodany: 55g",
+              ua: "Білки: 32г, Жири: 30г, Вуглеводи: 55г",
+              de: "Eiweiß: 32g, Fett: 30g, Kohlenhydrate: 55g",
+            },
+          },
+          {
+            id: "torta_cochinita",
+            category: "tortas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_09h03_36-dJoZjJoDBbcp45xK.png",
+            title: {
+              es: "Torta de Cochinita – 42 zł",
+              en: "Cochinita Sandwich – 42 zł",
+              pl: "Kanapka Cochinita – 42 zł",
+              ua: "Сендвіч Кочініта – 42 zł",
+              de: "Cochinita Sandwich – 42 zł",
+            },
+            desc: {
+              es: "Torta rellena de cochinita pibil, cocida lentamente con achiote y naranja. Se acompaña con cebolla morada encurtida y salsa de habanero.",
+              en: "Sandwich filled with slow-cooked cochinita pibil in achiote and orange. Served with pickled red onion and habanero salsa.",
+              pl: "Kanapka z powoli gotowaną cochinita pibil w achiote i pomarańczy. Z marynowaną czerwoną cebulą i sosem habanero.",
+              ua: "Сендвіч з повільно приготованою кочінітою пібіл з ачиоте та апельсином. З маринованою червоною цибулею і соусом хабанеро.",
+              de: "Sandwich mit langsam gegartem Cochinita Pibil in Achiote und Orange. Mit eingelegten roten Zwiebeln und Habanero-Salsa.",
+            },
+            ingredients: {
+              es: "Pan telera, carne de cochinita, cebolla morada encurtida, salsa habanero.",
+              en: "Telera bread, cochinita meat, pickled red onion, habanero salsa.",
+              pl: "Bułka telera, mięso cochinita, marynowana czerwona cebula, sos habanero.",
+              ua: "Хліб тельєра, м’ясо кочініта, маринована червона цибуля, соус хабанеро.",
+              de: "Telera-Brot, Cochinita-Fleisch, eingelegte rote Zwiebel, Habanero-Salsa.",
+            },
+            calories: "600 kcal",
+            macros: {
+              es: "Proteína: 30g, Grasa: 28g, Carbohidratos: 50g",
+              en: "Protein: 30g, Fat: 28g, Carbs: 50g",
+              pl: "Białko: 30g, Tłuszcz: 28g, Węglowodany: 50g",
+              ua: "Білки: 30г, Жири: 28г, Вуглеводи: 50г",
+              de: "Eiweiß: 30g, Fett: 28g, Kohlenhydrate: 50g",
+            },
+          },
+          {
+            id: "torta_lengua",
+            category: "tortas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_09h03_36-dJoZjJoDBbcp45xK.png",
+            title: {
+              es: "Torta de Lengua – 44 zł",
+              en: "Beef Tongue Sandwich – 44 zł",
+              pl: "Kanapka z Językiem – 44 zł",
+              ua: "Сендвіч з яловичим язиком – 44 zł",
+              de: "Rinderzungen-Sandwich – 44 zł",
+            },
+            desc: {
+              es: "Delicada lengua de res cocida lentamente y servida en pan telera con frijoles refritos, aguacate y jalapeños. Un clásico reconfortante.",
+              en: "Tender slow-cooked beef tongue served on telera bread with refried beans, avocado, and jalapeños. A comforting classic.",
+              pl: "Delikatny, wolno gotowany język wołowy podawany w bułce telera z fasolą, awokado i jalapeños. Klasyka w meksykańskim stylu.",
+              ua: "Ніжний яловичий язик, повільно приготований і поданий у хлібі тельєра з квасолею, авокадо та халапеньйо. Класика з комфортом.",
+              de: "Zart gegarte Rinderzunge auf Telera-Brot mit Bohnen, Avocado und Jalapeños. Ein herzhafter Klassiker.",
+            },
+            ingredients: {
+              es: "Pan telera, lengua de res cocida, frijoles refritos, aguacate, jalapeños.",
+              en: "Telera bread, cooked beef tongue, refried beans, avocado, jalapeños.",
+              pl: "Bułka telera, gotowany język wołowy, fasola, awokado, jalapeños.",
+              ua: "Хліб тельєра, варений яловичий язик, смажена квасоля, авокадо, халапеньйо.",
+              de: "Telera-Brot, gekochte Rinderzunge, Bohnenmus, Avocado, Jalapeños.",
+            },
+            calories: "620 kcal",
+            macros: {
+              es: "Proteína: 32g, Grasa: 30g, Carbohidratos: 52g",
+              en: "Protein: 32g, Fat: 30g, Carbs: 52g",
+              pl: "Białko: 32g, Tłuszcz: 30g, Węglowodany: 52g",
+              ua: "Білки: 32г, Жири: 30г, Вуглеводи: 52г",
+              de: "Eiweiß: 32g, Fett: 30g, Kohlenhydrate: 52g",
+            },
+          },
+          {
+            id: "quesadilla_flor",
+            category: "quesadillas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_09h01_59-mv0WEj0ZNQuyrl67.png",
+            title: {
+              es: "Quesadilla de Flor de Calabaza – 26 zł",
+              en: "Squash Blossom Quesadilla – 26 zł",
+              pl: "Quesadilla z Kwiatem Dyni – 26 zł",
+              ua: "Кесаділья з квіткою гарбуза – 26 zł",
+              de: "Quesadilla mit Kürbisblüte – 26 zł",
+            },
+            desc: {
+              es: "Tortilla de maíz rellena de flor de calabaza fresca y queso derretido. Una delicia suave y tradicional.",
+              en: "Corn tortilla filled with fresh squash blossom and melted cheese. A soft and traditional delight.",
+              pl: "Tortilla kukurydziana z nadzieniem z kwiatów dyni i roztopionego sera. Delikatna, tradycyjna przekąska.",
+              ua: "Кукурудзяна тортилья з квіткою гарбуза та розтопленим сиром. М’яка та традиційна страва.",
+              de: "Maistortilla gefüllt mit frischer Kürbisblüte und geschmolzenem Käse. Eine zarte, traditionelle Leckerei.",
+            },
+            ingredients: {
+              es: "Tortilla de maíz, flor de calabaza, queso Oaxaca.",
+              en: "Corn tortilla, squash blossom, Oaxaca cheese.",
+              pl: "Tortilla kukurydziana, kwiat dyni, ser Oaxaca.",
+              ua: "Кукурудзяна тортилья, квітка гарбуза, сир Оахака.",
+              de: "Maistortilla, Kürbisblüte, Oaxaca-Käse.",
+            },
+            calories: "340 kcal",
+            macros: {
+              es: "Proteína: 14g, Grasa: 18g, Carbohidratos: 28g",
+              en: "Protein: 14g, Fat: 18g, Carbs: 28g",
+              pl: "Białko: 14g, Tłuszcz: 18g, Węglowodany: 28g",
+              ua: "Білки: 14г, Жири: 18г, Вуглеводи: 28г",
+              de: "Eiweiß: 14g, Fett: 18g, Kohlenhydrate: 28g",
+            },
+          },
+          {
+            id: "salsa_verde",
+            category: "salsas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_08h59_18-YX4lQP4ozlIpvMez.png",
+            title: {
+              es: "Salsa Verde",
+              en: "Green Salsa",
+              pl: "Zielona Salsa",
+              ua: "Зелений Соус",
+              de: "Grüne Salsa",
+            },
+            desc: {
+              es: "Salsa fresca y picante hecha con tomatillo, chile serrano, ajo y cebolla. Ideal para tacos y quesadillas.",
+              en: "Fresh and spicy salsa made with tomatillo, serrano chili, garlic, and onion. Ideal for tacos and quesadillas.",
+              pl: "Świeża i pikantna salsa z tomatillo, papryczką serrano, czosnkiem i cebulą. Idealna do tacos i quesadillas.",
+              ua: "Свіжий і пікантний соус з томатільйо, чилі серрано, часнику та цибулі. Ідеально підходить до тако та кесадільї.",
+              de: "Frische und würzige Salsa aus Tomatillo, Serrano-Chili, Knoblauch und Zwiebeln. Ideal zu Tacos und Quesadillas.",
+            },
+            ingredients: {
+              es: "Tomatillo, chile serrano, ajo, cebolla, cilantro, sal.",
+              en: "Tomatillo, serrano chili, garlic, onion, cilantro, salt.",
+              pl: "Tomatillo, papryczka serrano, czosnek, cebula, kolendra, sól.",
+              ua: "Томатільйо, чилі серрано, часник, цибуля, кінза, сіль.",
+              de: "Tomatillo, Serrano-Chili, Knoblauch, Zwiebel, Koriander, Salz.",
+            },
+            calories: "30 kcal",
+            macros: {
+              es: "Proteína: 1g, Grasa: 1g, Carbohidratos: 5g",
+              en: "Protein: 1g, Fat: 1g, Carbs: 5g",
+              pl: "Białko: 1g, Tłuszcz: 1g, Węglowodany: 5g",
+              ua: "Білки: 1г, Жири: 1г, Вуглеводи: 5г",
+              de: "Eiweiß: 1g, Fett: 1g, Kohlenhydrate: 5g",
+            },
+          },
+          {
+            id: "salsa_roja",
+            category: "salsas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-29_09h04_54-AE0PBpxOO5solr55.png",
+            title: {
+              es: "Salsa Roja",
+              en: "Red Salsa",
+              pl: "Czerwona Salsa",
+              ua: "Червоний Соус",
+              de: "Rote Salsa",
+            },
+            desc: {
+              es: "Salsa de sabor profundo y picor medio, hecha con chiles secos, ajo, cebolla y jitomate. Perfecta para intensificar tus tacos.",
+              en: "Rich and moderately spicy salsa made with dried chilies, garlic, onion, and tomato. Perfect to intensify your tacos.",
+              pl: "Salsa o głębokim smaku i średniej ostrości, przygotowana z suszonych chili, czosnku, cebuli i pomidorów. Idealna do tacos.",
+              ua: "Соус з насиченим смаком і середньою гостротою, приготований з сушеного чилі, часнику, цибулі та томатів. Ідеально підходить до тако.",
+              de: "Würzige, mittel-scharfe Salsa aus getrockneten Chilis, Knoblauch, Zwiebeln und Tomaten. Perfekt, um deine Tacos aufzupeppen.",
+            },
+            ingredients: {
+              es: "Chile guajillo, chile de árbol, ajo, cebolla, jitomate, sal.",
+              en: "Guajillo chili, árbol chili, garlic, onion, tomato, salt.",
+              pl: "Papryczki guajillo i árbol, czosnek, cebula, pomidor, sól.",
+              ua: "Чилі гуахільо, árbol, часник, цибуля, томат, сіль.",
+              de: "Guajillo- und Árbol-Chilis, Knoblauch, Zwiebel, Tomate, Salz.",
+            },
+            calories: "35 kcal",
+            macros: {
+              es: "Proteína: 1g, Grasa: 1g, Carbohidratos: 6g",
+              en: "Protein: 1g, Fat: 1g, Carbs: 6g",
+              pl: "Białko: 1g, Tłuszcz: 1g, Węglowodany: 6g",
+              ua: "Білки: 1г, Жири: 1г, Вуглеводи: 6г",
+              de: "Eiweiß: 1g, Fett: 1g, Kohlenhydrate: 6g",
+            },
+          },
+          {
+            id: "agua_horchata",
+            category: "bebidas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/agua-horchata-AVL7wQrRD1CDrVzW.jpeg",
+            title: {
+              es: "Agua de Horchata – 12 zł",
+              en: "Horchata – 12 zł",
+              pl: "Horchata – 12 zł",
+              ua: "Орчата – 12 zł",
+              de: "Horchata – 12 zł",
+            },
+            desc: {
+              es: "Bebida refrescante a base de arroz, con canela y vainilla. Dulce, cremosa y perfecta para acompañar los tacos.",
+              en: "Refreshing rice-based drink with cinnamon and vanilla. Sweet, creamy, and perfect with tacos.",
+              pl: "Orzeźwiający napój na bazie ryżu z cynamonem i wanilią. Słodki, kremowy, idealny do tacos.",
+              ua: "Освіжаючий напій на основі рису з корицею та ваніллю. Солодкий, кремовий, ідеально підходить до тако.",
+              de: "Erfrischendes Getränk auf Reisbasis mit Zimt und Vanille. Süß, cremig und perfekt zu Tacos.",
+            },
+            ingredients: {
+              es: "Arroz, canela, vainilla, leche, azúcar.",
+              en: "Rice, cinnamon, vanilla, milk, sugar.",
+              pl: "Ryż, cynamon, wanilia, mleko, cukier.",
+              ua: "Рис, кориця, ваніль, молоко, цукор.",
+              de: "Reis, Zimt, Vanille, Milch, Zucker.",
+            },
+            calories: "160 kcal",
+            macros: {
+              es: "Proteína: 3g, Grasa: 2g, Carbohidratos: 33g",
+              en: "Protein: 3g, Fat: 2g, Carbs: 33g",
+              pl: "Białko: 3g, Tłuszcz: 2g, Węglowodany: 33g",
+              ua: "Білки: 3г, Жири: 2г, Вуглеводи: 33г",
+              de: "Eiweiß: 3g, Fett: 2g, Kohlenhydrate: 33g",
+            },
+          },
+          {
+            id: "agua_jamaica",
+            category: "bebidas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/7dds_aguajamaica_website-m5KMVk31rGswz0ZK.png",
+            title: {
+              es: "Agua de Jamaica – 12 zł",
+              en: "Hibiscus Water – 12 zł",
+              pl: "Napój z hibiskusa – 12 zł",
+              ua: "Напій з гібіскусу – 12 zł",
+              de: "Hibiskusgetränk – 12 zł",
+            },
+            desc: {
+              es: "Infusión de flores de jamaica con un toque ácido y refrescante. Ideal para acompañar comidas picantes.",
+              en: "Hibiscus flower infusion with a tangy, refreshing flavor. Perfect with spicy food.",
+              pl: "Napar z kwiatów hibiskusa o kwaśnym, orzeźwiającym smaku. Idealny do pikantnych potraw.",
+              ua: "Настій квітів гібіскуса з кислинкою та освіжаючим смаком. Ідеально підходить до гострих страв.",
+              de: "Hibiskusblütenaufguss mit säuerlich-erfrischendem Geschmack. Perfekt zu scharfem Essen.",
+            },
+            ingredients: {
+              es: "Flor de jamaica, agua, azúcar, canela (opcional).",
+              en: "Hibiscus flower, water, sugar, cinnamon (optional).",
+              pl: "Kwiaty hibiskusa, woda, cukier, cynamon (opcjonalnie).",
+              ua: "Квіти гібіскуса, вода, цукор, кориця (за бажанням).",
+              de: "Hibiskusblüten, Wasser, Zucker, Zimt (optional).",
+            },
+            calories: "90 kcal",
+            macros: {
+              es: "Proteína: 0g, Grasa: 0g, Carbohidratos: 23g",
+              en: "Protein: 0g, Fat: 0g, Carbs: 23g",
+              pl: "Białko: 0g, Tłuszcz: 0g, Węglowodany: 23g",
+              ua: "Білки: 0г, Жири: 0г, Вуглеводи: 23г",
+              de: "Eiweiß: 0g, Fett: 0g, Kohlenhydrate: 23g",
+            },
+          },
+          {
+            id: "corona-sin",
+            category: "bebidas",
+            image:
+              "https://assets.zyrosite.com/AVL7qZVElOfv5XjR/corona-cero-cerveza-sin-alcohol-AoPWBKDkDLSbEzNn.jpg", // usa tu URL si tienes una imagen distinta
+            title: {
+              es: "Corona Cerveza Sin Alcohol – 12 zł",
+              en: "Corona Alcohol-Free Beer – 12 zł",
+              pl: "Corona Bezalkoholowe Piwo – 12 zł",
+              ua: "Corona Пиво без алкоголю – 12 zł",
+              de: "Corona Alkoholfreies Bier – 12 zł",
+            },
+            desc: {
+              es: "Una cerveza mexicana clásica, con el mismo sabor refrescante de siempre, ahora sin alcohol. Perfecta para quienes buscan disfrutar sin compromisos. Servida fría con una rodaja de limón.",
+              en: "A classic Mexican beer with the same refreshing taste, now alcohol-free. Perfect for those who want to enjoy without compromise. Served cold with a slice of lime.",
+              pl: "Klasyczne meksykańskie piwo o orzeźwiającym smaku – teraz bezalkoholowe. Idealne dla tych, którzy chcą się cieszyć smakiem bez zobowiązań. Podawane na zimno z plasterkiem limonki.",
+              ua: "Класичне мексиканське пиво зі знайомим освіжаючим смаком — тепер без алкоголю. Ідеально для тих, хто хоче насолоджуватись без компромісів. Подається холодним із скибочкою лайма.",
+              de: "Ein klassisches mexikanisches Bier mit dem bekannten erfrischenden Geschmack – jetzt alkoholfrei. Perfekt für alle, die ohne Kompromisse genießen möchten. Kalt serviert mit einer Limettenscheibe.",
+            },
+            ingredients: {
+              es: "Agua, malta de cebada, jarabe de maíz, lúpulo, dióxido de carbono, antioxidante (ácido ascórbico).",
+              en: "Water, barley malt, corn syrup, hops, carbon dioxide, antioxidant (ascorbic acid).",
+              pl: "Woda, słód jęczmienny, syrop kukurydziany, chmiel, dwutlenek węgla, przeciwutleniacz (kwas askorbinowy).",
+              ua: "Вода, ячмінний солод, кукурудзяний сироп, хміль, вуглекислий газ, антиоксидант (аскорбінова кислота).",
+              de: "Wasser, Gerstenmalz, Maissirup, Hopfen, Kohlendioxid, Antioxidans (Ascorbinsäure).",
+            },
+            calories: "89 kcal",
+            macros: {
+              es: "Proteína: 0g, Grasa: 0g, Carbohidratos: 20g",
+              en: "Protein: 0g, Fat: 0g, Carbs: 20g",
+              pl: "Białko: 0g, Tłuszcz: 0g, Węglowodany: 20g",
+              ua: "Білки: 0г, Жири: 0г, Вуглеводи: 20г",
+              de: "Eiweiß: 0g, Fett: 0g, Kohlenhydrate: 20g",
+            },
+          },
+        ];
+
+        const renderMenu = (category) => {
+          const menu = document.getElementById("menuContent");
+          menu.innerHTML = "";
+
+          document.getElementById("tabTacos").innerText =
+            langLabels[currentLang].tacos;
+          document.getElementById("tabTortas").innerText =
+            langLabels[currentLang].tortas;
+          document.getElementById("tabQuesadillas").innerText =
+            langLabels[currentLang].quesadillas;
+          document.getElementById("tabSalsas").innerText =
+            langLabels[currentLang].salsas;
+          document.getElementById("tabBebidas").innerText =
+            langLabels[currentLang].bebidas;
+
+          const items = dishes.filter((d) => d.category === category);
+          items.forEach((dish) => {
+            menu.innerHTML += `
+            <section class="bg-white shadow rounded-xl overflow-hidden flex flex-col md:flex-row">
+              <img src="${dish.image}" alt="${
+              dish.title[currentLang]
+            }" class="w-full md:w-1/2 h-64 md:h-auto object-cover object-center">
+              <div class="p-6 flex flex-col justify-between gap-4">
+                <div>
+                  <h2 class="text-2xl font-bold text-[#d6283b]">${
+                    dish.title[currentLang]
+                  }</h2>
+                  <p class="text-gray-600 text-sm">${dish.desc[currentLang]}</p>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-800">${
+                    langLabels[currentLang].ingredientes
+                  }</h3>
+                  <p class="text-sm text-gray-600">${
+                    dish.ingredients[currentLang]
+                  }</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 text-sm text-gray-600">
+                  <div><strong>${langLabels[currentLang].calorias}:</strong> ${
+              dish.calories
+            }</div>
+                  <div><strong>${
+                    dish.macros[currentLang].split(",")[0]
+                  }</strong></div>
+                  <div><strong>${
+                    dish.macros[currentLang].split(",")[1]
+                  }</strong></div>
+                  <div><strong>${
+                    dish.macros[currentLang].split(",")[2]
+                  }</strong></div>
+                </div>
+              </div>
+            </section>`;
+          });
+        };
+
+        document
+          .getElementById("langSwitcher")
+          .addEventListener("change", (e) => {
+            currentLang = e.target.value;
+            renderMenu("tacos");
+            updateFooter();
+            translateStaticText();
+          });
+
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            document.querySelectorAll(".tab-btn").forEach((b) => {
+              b.classList.remove("bg-[#d6283b]", "text-white");
+              b.classList.add("bg-gray-200", "text-gray-700");
+            });
+            btn.classList.remove("bg-gray-200", "text-gray-700");
+            btn.classList.add("bg-[#d6283b]", "text-white");
+            renderMenu(btn.dataset.tab);
+          });
+        });
+
+        renderMenu("tacos");
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 300) {
+            scrollTopBtn.classList.remove("hidden");
+          } else {
+            scrollTopBtn.classList.add("hidden");
+          }
+        });
+
+        scrollTopBtn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        const updateFooter = () => {
+          document.getElementById("footerText").innerText =
+            langLabels[currentLang].digitalMenu;
+          document.getElementById("footerLinkText").innerText =
+            langLabels[currentLang].visitSite;
+        };
+      </script>
+    </main>
+    <button
+      id="scrollTopBtn"
+      class="hidden fixed bottom-6 right-6 bg-[#d6283b] text-white p-4 rounded-full shadow-lg hover:bg-[#b71b2b] transition z-50 text-2xl"
+      aria-label="Volver arriba"
+    >
+      ↑
+    </button>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Crear el botón dinámicamente
+        const btn = document.createElement("button");
+        btn.id = "scrollTopBtn";
+        btn.innerText = "↑";
+        btn.setAttribute("aria-label", "Volver arriba");
+        btn.className =
+          "hidden fixed bottom-6 right-6 bg-[#d6283b] text-white p-4 rounded-full shadow-lg hover:bg-[#b71b2b] transition z-50 text-2xl";
+        document.body.appendChild(btn);
+
+        // Mostrar/ocultar según scroll
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 300) {
+            btn.classList.remove("hidden");
+          } else {
+            btn.classList.add("hidden");
+          }
+        });
+
+        // Comportamiento de scroll
+        btn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // ✅ Aquí debe ir esta llamada
+        updateFooter();
+      });
+      const translateStaticText = () => {
+        document.getElementById("titleText").innerText =
+          langLabels[currentLang].digitalMenu;
+        document.getElementById("visitSiteLink").innerText =
+          langLabels[currentLang].visitSite;
+      };
+    </script>
+    <!-- Footer con mensaje de Food22 -->
+    <footer class="mt-12 bg-[#d6283b] text-white text-center py-6 px-4">
+      <p class="text-lg sm:text-xl font-semibold mb-2">
+        <span id="footerText">Do you want your digital menu?</span>
+      </p>
+      <a
+        id="footerLink"
+        href="https://www.food22.tech"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 bg-white text-[#d6283b] px-6 py-2 rounded-full font-medium shadow hover:bg-gray-100 transition transform hover:scale-105 hover:shadow-md"
+      >
+        <span>🌐</span>
+        <span id="footerLinkText">Visit www.food22.tech</span>
+      </a>
+    </footer>
+    <script>
+      const updateFooter = () => {
+        document.getElementById("footerText").innerText =
+          langLabels[currentLang].digitalMenu;
+        document.getElementById("footerLinkText").innerText =
+          langLabels[currentLang].visitSite;
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        updateFooter();
+        const translateStaticText = () => {
+          document.getElementById("footerText").innerText =
+            langLabels[currentLang].digitalMenu;
+          document.getElementById("footerLinkText").innerText =
+            langLabels[currentLang].visitSite;
+        };
+      });
+    </script>
+  </body>
+</html>
