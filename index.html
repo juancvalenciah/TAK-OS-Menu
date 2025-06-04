@@ -20,29 +20,67 @@
       html {
         scroll-behavior: smooth;
       }
+
+      /* Indicadores visuales laterales para scroll horizontal */
+      .menu-scroll {
+        position: relative;
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-snap-type: x mandatory;
+      }
+
+      .menu-scroll::before,
+      .menu-scroll::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 24px;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      .menu-scroll::before {
+        left: 0;
+        background: linear-gradient(to right, white, transparent);
+      }
+
+      .menu-scroll::after {
+        right: 0;
+        background: linear-gradient(to left, white, transparent);
+      }
     </style>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DYYWZWE5ZZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DYYWZWE5ZZ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  gtag('config', 'G-DYYWZWE5ZZ');
-</script>
+      gtag("config", "G-DYYWZWE5ZZ");
+    </script>
   </head>
   <body class="relative bg-white text-gray-800 font-sans">
     <!-- Logos Top -->
     <div
       class="bg-white w-full px-6 py-3 shadow-sm flex justify-between items-center max-w-6xl mx-auto"
     >
-     <a href="https://www.food22.tech" target="_blank" rel="noopener noreferrer">
-  <img
-    src="https://assets.zyrosite.com/AVL7qZVElOfv5XjR/food22_logo_green-m2W8wB1DM3SOk06N.png"
-    alt="Food22 Logo"
-    class="h-16 sm:h-20 object-contain"
-  />
-</a>
+      <a
+        href="https://www.food22.tech"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://assets.zyrosite.com/AVL7qZVElOfv5XjR/food22_logo_green-m2W8wB1DM3SOk06N.png"
+          alt="Food22 Logo"
+          class="h-16 sm:h-20 object-contain"
+        />
+      </a>
       <img
         src="https://assets.zyrosite.com/AVL7qZVElOfv5XjR/2025-05-28_22h52_20-YD0l15DVqjS2yJqb.png"
         alt="TAK-OS Logo"
@@ -76,7 +114,7 @@
         <div
         class="sticky top-[72px] z-50 bg-white mb-6 shadow-sm transition-all duration-300"
       >
-        <div class="overflow-x-auto no-scrollbar">
+        <div class="overflow-x-auto no-scrollbar menu-scroll relative">
           <div class="flex gap-2 w-max px-2 py-2" id="menuTabs">
             <button
               data-tab="tacos"
