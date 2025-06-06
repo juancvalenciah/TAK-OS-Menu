@@ -782,7 +782,11 @@
                     <section class="bg-white shadow rounded-xl overflow-hidden flex flex-col md:flex-row">
                       <img src="${dish.image}" alt="${
               dish.title[currentLang]
-            }" class="w-full md:w-1/2 h-64 md:h-auto object-cover object-center">
+            }" class="${
+              dish.category === "salsas" || dish.category === "bebidas"
+                ? "w-full md:w-1/2 object-contain max-h-[300px] bg-white"
+                : "w-full md:w-1/2 aspect-[3/2] object-cover object-center"
+            }">
                       <div class="p-6 flex flex-col justify-between gap-4">
                         <div>
                           <h2 class="text-2xl font-bold text-[#d6283b]">${
